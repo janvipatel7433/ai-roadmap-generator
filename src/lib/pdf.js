@@ -1,6 +1,6 @@
 import { marked } from "marked";
 import puppeteer from "puppeteer-core";
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min"; 
 import os from "os";
 
 export async function generatePDFBuffer(markdownContent) {
@@ -18,11 +18,11 @@ export async function generatePDFBuffer(markdownContent) {
     </html>
   `;
 
-  const isServerless = !!process.env.AWS_LAMBDA_FUNCTION_VERSION || !!process.env.NETLIFY;
-  const isWindows = os.platform() === "win32";
+  const isServerless = !!process.env.NETLIFY; // Simplified check
+  const isWindows = process.platform === "win32";
 
   const executablePath = isServerless
-    ? await chromium.executablePath() // ✅ Only called at runtime
+    ? await chromium.executablePath()
     : isWindows
       ? "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
       : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -32,7 +32,9 @@ export async function generatePDFBuffer(markdownContent) {
     executablePath,
     headless: chromium.headless,
     defaultViewport: chromium.defaultViewport,
+    protocolTimeout: 60000, // Added timeout
   });
+
 
   const page = await browser.newPage();
   await page.setContent(html, { waitUntil: "networkidle0" });

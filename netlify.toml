@@ -1,4 +1,7 @@
+[build]
+command = "next build"
+publish = ".next"
+
 [functions]
-  included_files = ["node_modules/@sparticuz/chromium/bin/**"]
-  external_node_modules = ["puppeteer-core", "@sparticuz/chromium"]
-  node_bundler = "esbuild"
+external_node_modules = ["puppeteer-core", "@sparticuz/chromium-min"]
+node_bundler = "esbuild"
