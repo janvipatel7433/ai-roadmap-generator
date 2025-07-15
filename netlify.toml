@@ -1,5 +1,4 @@
 [functions]
-[functions."*"]
   included_files = ["node_modules/@sparticuz/chromium/bin/**"]
-  external_node_modules = ["@sparticuz/chromium", "puppeteer-core"]
+  external_node_modules = ["puppeteer-core", "@sparticuz/chromium"]
   node_bundler = "esbuild"
