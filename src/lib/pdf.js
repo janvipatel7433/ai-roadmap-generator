@@ -1,5 +1,3 @@
-// lib/pdf.js
-
 import puppeteer from "puppeteer";
 import { marked } from "marked";
 

@@ -8,7 +8,7 @@ export async function POST(req) {
     const saved = await FormModel.create(body);
     return new Response(JSON.stringify(saved), { status: 200 });
   } catch (err) {
-    console.error("❌ Error in /api/submit-form:", err);
+    console.error("Error in /api/submit-form:", err);
     return new Response("Internal Server Error", { status: 500 });
   }
 }
