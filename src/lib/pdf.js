@@ -3,13 +3,6 @@ import puppeteer from "puppeteer-core";
 import chromium from "@sparticuz/chromium";
 import os from "os";
 
-const isServerless = !!process.env.AWS_REGION || !!process.env.NETLIFY;
-const isWindows = os.platform() === "win32";
-
-// Manually set the Chrome path for Windows (adjust if needed)
-const localChromePath =
-  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"; // <-- You can check this path on your machine
-
 export async function generatePDFBuffer(markdownContent) {
   const html = `
     <html>
@@ -25,14 +18,19 @@ export async function generatePDFBuffer(markdownContent) {
     </html>
   `;
 
+  const isServerless = !!process.env.AWS_LAMBDA_FUNCTION_VERSION || !!process.env.NETLIFY;
+  const isWindows = os.platform() === "win32";
+
+  const executablePath = isServerless
+    ? await chromium.executablePath() // ✅ Only called at runtime
+    : isWindows
+      ? "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+      : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+
   const browser = await puppeteer.launch({
     args: chromium.args,
-    executablePath: isServerless
-      ? await chromium.executablePath()
-      : isWindows
-      ? localChromePath
-      : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // Mac fallback
-    headless: true,
+    executablePath,
+    headless: chromium.headless,
     defaultViewport: chromium.defaultViewport,
   });
 
