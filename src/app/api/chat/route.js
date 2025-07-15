@@ -31,6 +31,8 @@ export async function POST(req) {
           console.log("📄 Triggering PDF + Email...");
           // const pdfBuffer = await generatePDFBuffer(fullChatMarkdown);
 
+          const pdfBuffer = '';
+
 
 
 
