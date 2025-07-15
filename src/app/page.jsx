@@ -66,7 +66,7 @@ export default function HomePage() {
     <Chat email={formData.email} />
   ) : (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 text-white">
-      <h1 className="text-3xl font-semibold text-white mb-6 text-center">Start your AI journey</h1>
+      <h1 className="text-3xl font-semibold text-white mb-6 text-center">Start your AI journey!!</h1>
 
       <div className="py-8 px-12 max-w-xl w-full bg-white/20 text-white rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-4">
