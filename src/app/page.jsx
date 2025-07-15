@@ -66,8 +66,7 @@ export default function HomePage() {
     <Chat email={formData.email} />
   ) : (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 text-white">
-      <h1 className="text-3xl font-semibold text-white mb-6 text-center">Start your AI journey!!</h1>
-
+      <h1 className="text-3xl font-semibold text-white mb-6 text-center">Start your AI journey</h1>
       <div className="py-8 px-12 max-w-xl w-full bg-white/20 text-white rounded-lg shadow-md">
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* First Name */}
@@ -171,13 +170,11 @@ export default function HomePage() {
           {/* Submit Button */}
           <button
             type="submit"
-            className="py-3 w-full bg-gradient-to-r from-[#d64590] to-[#f0657d] text-white border-0 rounded-md shadow-[0_0_0_2px_rgba(255,255,255,0.3)] cursor-pointer transition-all duration-500 ease-in-out whitespace-nowrap"
-          >
+            className="py-3 w-full bg-gradient-to-r from-[#d64590] to-[#f0657d] text-white border-0 rounded-md shadow-[0_0_0_2px_rgba(255,255,255,0.3)] cursor-pointer transition-all duration-500 ease-in-out whitespace-nowrap">
             Start Chat
           </button>
         </form>
       </div>
     </div>
-
   );
 }
