@@ -9,10 +9,7 @@ export const runtime = "nodejs";
 
 export async function POST(req) {
   try {
-    console.log("👉 Request received");
-
     const { messages, email } = await req.json();
-    console.log("📨 Email from body:", email);
 
     // Stream assistant response
     const result = await streamText({
@@ -20,11 +17,10 @@ export async function POST(req) {
       messages,
     });
 
-    let fullAssistantText = "";
+
     const stream = result.toAIStream({
       onFinal: async (finalText) => {
-        fullAssistantText = finalText;
-
+  
         // Build Markdown chat history
         const fullChatMarkdown = messages
           .map((msg) => `**${msg.role === "user" ? "You" : "Assistant"}**: ${msg.content}`)
@@ -33,7 +29,7 @@ export async function POST(req) {
         // PDF + Email if conditions met
         if (/roadmap/i.test(finalText) && /finalized/i.test(finalText) && email) {
           console.log("📄 Triggering PDF + Email...");
-          const pdfBuffer = await generatePDFBuffer(fullChatMarkdown);
+          // const pdfBuffer = await generatePDFBuffer(fullChatMarkdown);
           await sendEmailWithPDF(email, pdfBuffer);
           console.log("✅ PDF generated and email sent");
         }
