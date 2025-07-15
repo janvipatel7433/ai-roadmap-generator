@@ -4,6 +4,7 @@ import { openai } from "@ai-sdk/openai";
 import { streamText, StreamingTextResponse } from "ai";
 import { generatePDFBuffer } from "@/lib/pdf";
 import { sendEmailWithPDF } from "@/lib/email";
+import nodemailer from 'nodemailer';
 
 export const runtime = "nodejs";
 
